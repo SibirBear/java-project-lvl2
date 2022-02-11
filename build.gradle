@@ -13,6 +13,11 @@ plugins {
 group = 'hexlet.code'
 version = '1.0-SNAPSHOT'
 
+ext {
+    picocliVersion = '4.6.2'
+    jacksonVersion = '2.13.1'
+}
+
 repositories {
     mavenCentral()
 
@@ -23,6 +28,7 @@ application {
 }
 
 dependencies {
-    implementation 'info.picocli:picocli:4.6.2'
+    implementation "info.picocli:picocli:${picocliVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
 
 }
