@@ -21,6 +21,8 @@ import java.util.stream.Stream;
 
 public class Differ {
 
+    private static final int TAB_CHAR_CONSTANT = 4;
+
     public static String generate(final String filePath1, final String filePath2) throws JsonProcessingException {
         String contentFileFirst = getData(filePath1);
         String contentFileSecond = getData(filePath2);
@@ -49,7 +51,7 @@ public class Differ {
 
     private static Map<String, Object> convertStringToMap(final String str) throws JsonProcessingException {
         ObjectMapper jsonObjMapper = new ObjectMapper();
-        return jsonObjMapper.readValue(str, new TypeReference<>() {}); //<Map<String, Object>>()
+        return jsonObjMapper.readValue(str, new TypeReference<>() { }); //<Map<String, Object>>()
 
     }
 
@@ -87,7 +89,7 @@ public class Differ {
 
     }
 
-    private static Set<String> allKeys (final Map<String, Object> firstMap, final Map<String, Object> secondMap) {
+    private static Set<String> allKeys(final Map<String, Object> firstMap, final Map<String, Object> secondMap) {
         Set<String> keys = new HashSet<>(firstMap.keySet());
         keys.addAll(secondMap.keySet());
         return keys;
@@ -106,7 +108,7 @@ public class Differ {
 
     private static String format(final Map<String, Object> differentNodes) {
         return differentNodes.keySet().stream()
-                .sorted(Comparator.comparing((String key) -> key.substring(4))
+                .sorted(Comparator.comparing((String key) -> key.substring(TAB_CHAR_CONSTANT))
                         .thenComparing(key -> " -+".indexOf(key.charAt(2))))
                 .map(value -> value + differentNodes.get(value))
                 .collect(Collectors.joining("\n", "{\n", "\n}"));

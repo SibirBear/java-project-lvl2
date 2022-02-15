@@ -7,7 +7,8 @@ import picocli.CommandLine.Command;
 import java.util.concurrent.Callable;
 
 import static hexlet.code.Differ.generate;
-import static picocli.CommandLine.*;
+import static picocli.CommandLine.Option;
+import static picocli.CommandLine.Parameters;
 
 
 @Command(mixinStandardHelpOptions = true, version = "Version App is 1.0",
@@ -16,7 +17,7 @@ import static picocli.CommandLine.*;
 
 public class App implements Callable<Integer> {
 
-    @Option(names = {"-f", "--format"},description = "output format [default: stylish]")
+    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]")
     private String format;
 
     @Parameters(description = "path to first file")
@@ -31,10 +32,19 @@ public class App implements Callable<Integer> {
 
     }
 
+    /**
+     * The method for determining the differences of the specified files.
+     *
+     * @return status code = 0
+     */
     @Override
-    public Integer call() throws JsonProcessingException {
-        System.out.println(generate(filepath1, filepath2));
-        return 0;
+    public Integer call() {
+        try {
+            System.out.println(generate(filepath1, filepath2));
+            return 0;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
