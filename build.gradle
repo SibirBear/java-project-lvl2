@@ -10,6 +10,7 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'checkstyle'
     id 'net.ltgt.errorprone' version '2.0.2'
+    id 'jacoco'
 }
 
 group = 'hexlet.code'
@@ -43,4 +44,10 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
