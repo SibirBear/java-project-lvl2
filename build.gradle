@@ -9,6 +9,7 @@ plugins {
     id 'application'
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'checkstyle'
+    id 'net.ltgt.errorprone' version '2.0.2'
 }
 
 group = 'hexlet.code'
@@ -17,15 +18,13 @@ version = '1.0-SNAPSHOT'
 ext {
     picocliVersion = '4.6.2'
     jacksonVersion = '2.13.1'
+    jUnitJupiterVersion = '5.8.2'
+    errorProneVersion = '2.11.0'
 }
 
 repositories {
     mavenCentral()
 
-}
-
-compileJava {
-    options.release = 17
 }
 
 application {
@@ -36,4 +35,12 @@ dependencies {
     implementation "info.picocli:picocli:${picocliVersion}"
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
 
+    testImplementation "org.junit.jupiter:junit-jupiter:${jUnitJupiterVersion}"
+
+    errorprone "com.google.errorprone:error_prone_core:${errorProneVersion}"
+
+}
+
+test {
+    useJUnitPlatform()
 }
