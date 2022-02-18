@@ -43,7 +43,7 @@ public class Differ {
         try (Stream<String> stream = Files.lines(path)) {
             stream.forEach(s -> sb.append(s).append("\n"));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
 
         return sb.toString();
