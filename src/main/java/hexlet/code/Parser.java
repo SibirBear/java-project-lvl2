@@ -18,8 +18,8 @@ public class Parser {
                                                          final String file) throws JsonProcessingException {
         String[] fileName = file.split("\\.", 0); //limit - for errorprone
         String extension = fileName[fileName.length - 1];
-        
-        if (JSON.equals(extension)){
+
+        if (JSON.equals(extension)) {
             ObjectMapper jsonObjMapper = new ObjectMapper();
             return jsonObjMapper.readValue(content, new TypeReference<>() { });
         }
