@@ -1,8 +1,6 @@
 package hexlet.code;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,6 +17,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static hexlet.code.Parser.convertStringToMap;
+
 public class Differ {
 
     private static final int TAB_CHAR_CONSTANT = 4;
@@ -26,10 +26,8 @@ public class Differ {
     public static String generate(final String filePath1, final String filePath2) throws JsonProcessingException {
         String contentFileFirst = getData(filePath1);
         String contentFileSecond = getData(filePath2);
-//        System.out.println("file1:\n" + contentFileFirst);
-//        System.out.println("file2:\n" + contentFileSecond);
-        Map<String, Object> firstMap = convertStringToMap(contentFileFirst);
-        Map<String, Object> secondMap = convertStringToMap(contentFileSecond);
+        Map<String, Object> firstMap = convertStringToMap(contentFileFirst, filePath1);
+        Map<String, Object> secondMap = convertStringToMap(contentFileSecond, filePath2);
 
         List<Map<String, Object>> differentsList = analyserMaps(firstMap, secondMap);
 
@@ -47,12 +45,6 @@ public class Differ {
         }
 
         return sb.toString();
-    }
-
-    private static Map<String, Object> convertStringToMap(final String str) throws JsonProcessingException {
-        ObjectMapper jsonObjMapper = new ObjectMapper();
-        return jsonObjMapper.readValue(str, new TypeReference<>() { }); //<Map<String, Object>>()
-
     }
 
     private static List<Map<String, Object>> analyserMaps(final Map<String, Object> first,

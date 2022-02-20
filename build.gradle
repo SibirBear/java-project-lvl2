@@ -36,6 +36,7 @@ application {
 dependencies {
     implementation "info.picocli:picocli:${picocliVersion}"
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonVersion}"
 
     testImplementation "org.junit.jupiter:junit-jupiter:${jUnitJupiterVersion}"
 
