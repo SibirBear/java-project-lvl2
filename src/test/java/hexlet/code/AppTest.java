@@ -14,14 +14,22 @@ public class AppTest {
 
     private final String pathToResources = "src/test/resources/";
 
-    private final String expected = getDataFile(Path.of(pathToResources + "expected_flat_json"));
+    private final String expectedFlat = getDataFile(Path.of(pathToResources + "expected_flat"));
 
     @Test
-    void flatTest() throws JsonProcessingException {
+    void flatJsonTest() throws JsonProcessingException {
         final String firstTestFile = pathToResources + "test_file1.json";
         final String secondTestFile = pathToResources + "test_file2.json";
 
-        Assertions.assertEquals(expected, generate(firstTestFile, secondTestFile));
+        Assertions.assertEquals(expectedFlat, generate(firstTestFile, secondTestFile));
+    }
+
+    @Test
+    void flatYamlTest() throws JsonProcessingException {
+        final String firstTestFile = pathToResources + "test_file1.yaml";
+        final String secondTestFile = pathToResources + "test_file2.yml";
+
+        Assertions.assertEquals(expectedFlat, generate(firstTestFile, secondTestFile));
     }
 
 
