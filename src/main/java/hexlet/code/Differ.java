@@ -7,31 +7,35 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static hexlet.code.Parser.convertStringToMap;
+import static hexlet.code.formatter.Formatter.useFormat;
+import static hexlet.code.formatter.formatFactory.FormatConstant.STYLISH;
 
 public class Differ {
 
-    private static final int TAB_CHAR_CONSTANT = 4;
+    public static String generate(final String filePath1, final String filePath2)
+            throws JsonProcessingException {
+        return generate(filePath1, filePath2, STYLISH);
+    }
 
-    public static String generate(final String filePath1, final String filePath2) throws JsonProcessingException {
+    public static String generate(final String filePath1, final String filePath2,
+                                  final String format) throws JsonProcessingException {
         String contentFileFirst = getData(filePath1);
         String contentFileSecond = getData(filePath2);
         Map<String, Object> firstMap = convertStringToMap(contentFileFirst, filePath1);
         Map<String, Object> secondMap = convertStringToMap(contentFileSecond, filePath2);
 
-        List<Map<String, Object>> differentsList = analyserMaps(firstMap, secondMap);
+        List<Map<String, Object>> differenceList = analyserMaps(firstMap, secondMap);
 
-        return format(mapToFormat(differentsList));
+        return useFormat(differenceList, format);
     }
 
     private static String getData(final String filePath) {
@@ -93,51 +97,6 @@ public class Differ {
         result.put("status", status);
         result.put("old", oldValue);
         result.put("new", newValue);
-
-        return result;
-
-    }
-
-    private static String format(final Map<String, Object> differentNodes) {
-        return differentNodes.keySet().stream()
-                .sorted(Comparator.comparing((String key) -> key.substring(TAB_CHAR_CONSTANT))
-                        .thenComparing(key -> " -+".indexOf(key.charAt(2))))
-                .map(value -> value + differentNodes.get(value))
-                .collect(Collectors.joining("\n", "{\n", "\n}"));
-
-    }
-
-    private static Map<String, Object> mapToFormat(final List<Map<String, Object>> listDifferentNodes) {
-
-        Map<String, Object> analysedMap = new LinkedHashMap<>();
-        for (Map<String, Object> diffNode : listDifferentNodes) {
-            analysedMap.putAll(analyser(diffNode));
-        }
-
-        return analysedMap;
-
-    }
-
-    private static Map<String, Object> analyser(final Map<String, Object> map) {
-
-        Map<String, Object> result = new LinkedHashMap<>();
-
-        if (Objects.equals(map.get("status"), "changed")) {
-            result.put("  - " + map.get("key") + ": ", map.get("old"));
-            result.put("  + " + map.get("key") + ": ", map.get("new"));
-        }
-
-        if (Objects.equals(map.get("status"), "deleted")) {
-            result.put("  - " + map.get("key") + ": ", map.get("old"));
-        }
-
-        if (Objects.equals(map.get("status"), "added")) {
-            result.put("  + " + map.get("key") + ": ", map.get("new"));
-        }
-
-        if (Objects.equals(map.get("status"), "unchanged")) {
-            result.put("    " + map.get("key") + ": ", map.get("old"));
-        }
 
         return result;
 
