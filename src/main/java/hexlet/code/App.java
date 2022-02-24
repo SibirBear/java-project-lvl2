@@ -9,15 +9,17 @@ import java.util.concurrent.Callable;
 import static hexlet.code.Differ.generate;
 import static picocli.CommandLine.Option;
 import static picocli.CommandLine.Parameters;
+import static picocli.CommandLine.defaultExceptionHandler;
 
 
-@Command(mixinStandardHelpOptions = true, version = "Version App is 1.0",
+@Command(mixinStandardHelpOptions = true, version = "App version is @|fg(yellow) 1.0|@",
         name = "gendiff",
-        description = "Compares two configuration files and shows a difference.")
+        description = "@|bold Compares two configuration files and shows a difference.|@")
 
 public class App implements Callable<Integer> {
 
-    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]")
+    @Option(names = {"-f", "--format"}, defaultValue = "stylish",
+            description = "output format [default: ${DEFAULT-VALUE}]")
     private String format;
 
     @Parameters(description = "path to first file")
@@ -27,7 +29,8 @@ public class App implements Callable<Integer> {
     private String filepath2;
 
     public static void main(String[] args) {
-        int code = new CommandLine(new App()).execute(args);
+        int code = new CommandLine(new App())
+                .setColorScheme(defaultExceptionHandler().colorScheme()).execute(args);
         System.exit(code);
 
     }
@@ -40,7 +43,7 @@ public class App implements Callable<Integer> {
     @Override
     public Integer call() {
         try {
-            System.out.println(generate(filepath1, filepath2));
+            System.out.println(generate(filepath1, filepath2, format));
             return 0;
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
