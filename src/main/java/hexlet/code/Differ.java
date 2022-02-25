@@ -16,8 +16,8 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import static hexlet.code.Parser.convertStringToMap;
-import static hexlet.code.formatter.Formatter.useFormat;
-import static hexlet.code.formatter.formatFactory.FormatConstant.STYLISH;
+import static hexlet.code.Formatter.useFormat;
+import static hexlet.code.formatFactory.FormatConstant.STYLISH;
 
 public class Differ {
 

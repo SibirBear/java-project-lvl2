@@ -1,8 +1,7 @@
-package hexlet.code.formatter.formatFactory;
+package hexlet.code.formatFactory;
 
-import hexlet.code.formatter.formatFactory.imp.Stylish;
-
-import static hexlet.code.formatter.formatFactory.FormatConstant.STYLISH;
+import hexlet.code.formatters.Format;
+import hexlet.code.formatters.Stylish;
 
 public class FormatFactory {
 
@@ -16,7 +15,7 @@ public class FormatFactory {
     public Format setFormat(final String formatType) {
         Format format = null;
 
-        if (STYLISH.equals(formatType)) {
+        if (FormatConstant.STYLISH.equals(formatType)) {
             format = new Stylish();
         }
 

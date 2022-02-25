@@ -1,7 +1,7 @@
-package hexlet.code.formatter;
+package hexlet.code;
 
-import hexlet.code.formatter.formatFactory.Format;
-import hexlet.code.formatter.formatFactory.FormatFactory;
+import hexlet.code.formatters.Format;
+import hexlet.code.formatFactory.FormatFactory;
 
 import java.util.List;
 import java.util.Map;
