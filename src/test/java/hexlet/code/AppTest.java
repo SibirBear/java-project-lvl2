@@ -12,41 +12,36 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest {
 
+    private final String PLAIN = "plain";
     private final String pathToResources = "src/test/resources/";
 
-    private final String expectedFlat = getDataFile(Path.of(pathToResources + "expected_flat"));
     private final String expectedNested = getDataFile(Path.of(pathToResources + "expected_nested"));
+    private final String expectedPlain = getDataFile(Path.of(pathToResources + "expected_plain"));
 
-    @Test
-    void flatJsonTest() throws JsonProcessingException {
-        final String firstTestFile = pathToResources + "test_file1.json";
-        final String secondTestFile = pathToResources + "test_file2.json";
+    private final String firstTestFileJson = pathToResources + "test1.json";
+    private final String secondTestFileJson = pathToResources + "test2.json";
+    private final String firstTestFileYml = pathToResources + "test1.yaml";
+    private final String secondTestFileYml = pathToResources + "test2.yml";
 
-        assertEquals(expectedFlat, generate(firstTestFile, secondTestFile));
-    }
-
-    @Test
-    void flatYamlTest() throws JsonProcessingException {
-        final String firstTestFile = pathToResources + "test_file1.yaml";
-        final String secondTestFile = pathToResources + "test_file2.yml";
-
-        assertEquals(expectedFlat, generate(firstTestFile, secondTestFile));
-    }
 
     @Test
     void nestedJsonTest() throws JsonProcessingException {
-        final String firstTestFile = pathToResources + "test_nested1.json";
-        final String secondTestFile = pathToResources + "test_nested2.json";
-
-        assertEquals(expectedNested, generate(firstTestFile, secondTestFile));
+        assertEquals(expectedNested, generate(firstTestFileJson, secondTestFileJson));
     }
 
     @Test
     void nestedYamlTest() throws JsonProcessingException {
-        final String firstTestFile = pathToResources + "test_nested1.yaml";
-        final String secondTestFile = pathToResources + "test_nested2.yml";
+        assertEquals(expectedNested, generate(firstTestFileYml, secondTestFileYml));
+    }
 
-        assertEquals(expectedNested, generate(firstTestFile, secondTestFile));
+    @Test
+    void plainJsonTest() throws JsonProcessingException {
+        assertEquals(expectedPlain, generate(firstTestFileJson, secondTestFileJson, PLAIN));
+    }
+
+    @Test
+    void plainYamlTest() throws JsonProcessingException {
+        assertEquals(expectedPlain, generate(firstTestFileYml, secondTestFileYml, PLAIN));
     }
 
 
