@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest {
 
-    private final String PLAIN = "plain";
+    private final String plainFormat = "plain";
     private final String pathToResources = "src/test/resources/";
 
     private final String expectedNested = getDataFile(Path.of(pathToResources + "expected_nested"));
@@ -36,12 +36,12 @@ public class AppTest {
 
     @Test
     void plainJsonTest() throws JsonProcessingException {
-        assertEquals(expectedPlain, generate(firstTestFileJson, secondTestFileJson, PLAIN));
+        assertEquals(expectedPlain, generate(firstTestFileJson, secondTestFileJson, plainFormat));
     }
 
     @Test
     void plainYamlTest() throws JsonProcessingException {
-        assertEquals(expectedPlain, generate(firstTestFileYml, secondTestFileYml, PLAIN));
+        assertEquals(expectedPlain, generate(firstTestFileYml, secondTestFileYml, plainFormat));
     }
 
 
