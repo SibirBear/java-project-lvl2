@@ -14,8 +14,8 @@ public class Parser {
     private static final String YAML1 = "yml";
     private static final String YAML2 = "yaml";
 
-    public static Map<String, Object> convertStringToMap(final String content,
-                                                         final String file) throws JsonProcessingException {
+    public static Map<String, Object> parser(final String content,
+                                             final String file) throws JsonProcessingException {
         String[] fileName = file.split("\\.", 0); //limit - for errorprone
         String extension = fileName[fileName.length - 1];
 
