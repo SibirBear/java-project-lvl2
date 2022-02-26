@@ -13,10 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AppTest {
 
     private final String plainFormat = "plain";
+    private final String jsonFormat = "json";
     private final String pathToResources = "src/test/resources/";
 
     private final String expectedNested = getDataFile(Path.of(pathToResources + "expected_nested"));
     private final String expectedPlain = getDataFile(Path.of(pathToResources + "expected_plain"));
+    private final String expectedJson = getDataFile(Path.of(pathToResources + "expected_json"));
 
     private final String firstTestFileJson = pathToResources + "test1.json";
     private final String secondTestFileJson = pathToResources + "test2.json";
@@ -42,6 +44,16 @@ public class AppTest {
     @Test
     void plainYamlTest() throws JsonProcessingException {
         assertEquals(expectedPlain, generate(firstTestFileYml, secondTestFileYml, plainFormat));
+    }
+
+    @Test
+    void jsonFormatJsonTest() throws JsonProcessingException {
+        assertEquals(expectedJson, generate(firstTestFileJson, secondTestFileJson, jsonFormat));
+    }
+
+    @Test
+    void jsonFormatYamlTest() throws JsonProcessingException {
+        assertEquals(expectedJson, generate(firstTestFileYml, secondTestFileYml, jsonFormat));
     }
 
 
