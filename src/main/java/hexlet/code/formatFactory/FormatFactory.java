@@ -1,9 +1,11 @@
 package hexlet.code.formatFactory;
 
 import hexlet.code.formatters.Format;
+import hexlet.code.formatters.Json;
 import hexlet.code.formatters.Plain;
 import hexlet.code.formatters.Stylish;
 
+import static hexlet.code.formatFactory.FormatConstant.JSON;
 import static hexlet.code.formatFactory.FormatConstant.PLAIN;
 import static hexlet.code.formatFactory.FormatConstant.STYLISH;
 
@@ -25,6 +27,10 @@ public class FormatFactory {
 
         if (PLAIN.equals(formatType)) {
             format = new Plain();
+        }
+
+        if (JSON.equals(formatType)) {
+            format = new Json();
         }
 
         return format;
