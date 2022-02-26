@@ -19,15 +19,11 @@ import static hexlet.code.formatters.FormattersConstants.UNCHANGED_VALUE;
 public class Stylish extends Format {
 
     private static final int TAB_CHAR_CONSTANT = 4;
-    public static final String PLUS = "  + ";
-    public static final String MINUS = "  - ";
-    public static final String SPACE = "    ";
-    public static final String COLON = ": ";
 
     /**
-     * Returns string after analyse data and formatting to specified input.
+     * Returns string after analyse data and formatting to specified output in Stylish.
      * @param mapToFormat data from two files which need to analyse and formatting.
-     * @return Returns string after analyse data and formatting to specified input.
+     * @return Returns string after analyse data and formatting to specified output in Stylish.
      */
     @Override
     public String format(final List<Map<String, Object>> mapToFormat) {
@@ -58,15 +54,15 @@ public class Stylish extends Format {
         Object newValue = diffNode.get(NEW_VALUE);
 
         if (Objects.equals(status, CHANGED_VALUE) || Objects.equals(status, DELETED_VALUE)) {
-            result.put(MINUS + key + COLON, oldValue);
+            result.put(String.format("  - %s: ", key), oldValue);
         }
 
         if (Objects.equals(status, CHANGED_VALUE) || Objects.equals(status, ADDED_VALUE)) {
-            result.put(PLUS + key + COLON, newValue);
+            result.put(String.format("  + %s: ", key), newValue);
         }
 
         if (Objects.equals(status, UNCHANGED_VALUE)) {
-            result.put(SPACE + key + COLON, oldValue);
+            result.put(String.format("    %s: ", key), oldValue);
         }
 
         return result;

@@ -23,9 +23,9 @@ public class Plain extends Format {
     private static final String DELETED_STRING = " was removed";
 
     /**
-     * Returns string after analyse data and formatting to specified input.
+     * Returns string after analyse data and formatting to specified output in Plain.
      * @param mapToFormat data from two files which need to analyse and formatting.
-     * @return Returns string after analyse data and formatting to specified input.
+     * @return Returns string after analyse data and formatting to specified output in Plain.
      */
     @Override
     public String format(final List<Map<String, Object>> mapToFormat) {
