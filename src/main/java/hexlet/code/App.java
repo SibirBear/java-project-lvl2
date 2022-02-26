@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
+import java.io.IOException;
 import java.util.concurrent.Callable;
 
 import static hexlet.code.Differ.generate;
@@ -45,7 +46,7 @@ public class App implements Callable<Integer> {
         try {
             System.out.println(generate(filepath1, filepath2, format));
             return 0;
-        } catch (JsonProcessingException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
