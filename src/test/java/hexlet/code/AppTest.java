@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -27,32 +26,32 @@ public class AppTest {
 
 
     @Test
-    void nestedJsonTest() throws JsonProcessingException {
+    void nestedJsonTest() throws IOException {
         assertEquals(expectedNested, generate(firstTestFileJson, secondTestFileJson));
     }
 
     @Test
-    void nestedYamlTest() throws JsonProcessingException {
+    void nestedYamlTest() throws IOException {
         assertEquals(expectedNested, generate(firstTestFileYml, secondTestFileYml));
     }
 
     @Test
-    void plainJsonTest() throws JsonProcessingException {
+    void plainJsonTest() throws IOException {
         assertEquals(expectedPlain, generate(firstTestFileJson, secondTestFileJson, plainFormat));
     }
 
     @Test
-    void plainYamlTest() throws JsonProcessingException {
+    void plainYamlTest() throws IOException {
         assertEquals(expectedPlain, generate(firstTestFileYml, secondTestFileYml, plainFormat));
     }
 
     @Test
-    void jsonFormatJsonTest() throws JsonProcessingException {
+    void jsonFormatJsonTest() throws IOException {
         assertEquals(expectedJson, generate(firstTestFileJson, secondTestFileJson, jsonFormat));
     }
 
     @Test
-    void jsonFormatYamlTest() throws JsonProcessingException {
+    void jsonFormatYamlTest() throws IOException {
         assertEquals(expectedJson, generate(firstTestFileYml, secondTestFileYml, jsonFormat));
     }
 

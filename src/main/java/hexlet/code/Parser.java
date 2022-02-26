@@ -1,10 +1,10 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +15,7 @@ public class Parser {
     private static final String YAML2 = "yaml";
 
     public static Map<String, Object> parser(final String content,
-                                             final String file) throws JsonProcessingException {
+                                             final String file) throws IOException {
         String[] fileName = file.split("\\.", 0); //limit - for errorprone
         String extension = fileName[fileName.length - 1];
 

@@ -1,8 +1,8 @@
 package hexlet.code.formatters;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +20,7 @@ public class Json extends Format {
 
         try {
             result = objectMapper.writeValueAsString(mapToFormat);
-        } catch (JsonProcessingException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
